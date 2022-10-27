@@ -12,6 +12,11 @@ async function main() {
     await readFile('response.json')
   );
 
+  const OUTPUT_DIRECTORY = 'map-data';
+
+  await rm(OUTPUT_DIRECTORY, { recursive: true });
+  await mkdir(OUTPUT_DIRECTORY);
+
   const MEMBER_TYPES = {
     'HASTANE': 'hospital',
     'TIP MERKEZİ': 'medical_center',
@@ -19,11 +24,6 @@ async function main() {
     'FİZİK TEDAVİ MERKEZİ': 'physiotherapist',
     'TIBBİ MALZEME': 'medical_supplier',
   };
-
-  const OUTPUT_DIRECTORY = 'map-data';
-
-  await rm(OUTPUT_DIRECTORY, { recursive: true });
-  await mkdir(OUTPUT_DIRECTORY);
 
   const fileStreams = Object.entries(MEMBER_TYPES).reduce(
     (fileStreams, [key, value]) => ({
